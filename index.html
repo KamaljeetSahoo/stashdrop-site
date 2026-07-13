@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stashdrop — the Mac you already own is your cloud</title>
+<meta name="description" content="Move photos and videos off your iPhone straight onto your Mac. Encrypted, verified, no cloud, no subscription.">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta property="og:title" content="Stashdrop — the Mac you already own is your cloud">
+<meta property="og:description" content="Move photos and videos off your iPhone straight onto your Mac. Encrypted, verified, no cloud, no subscription.">
+<meta property="og:image" content="https://kamaljeetsahoo.github.io/stashdrop/icon.png">
+<meta property="og:url" content="https://kamaljeetsahoo.github.io/stashdrop/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{
+    --bg:#0b1220; --bg2:#0f1830; --card:#141f38; --line:#24314f;
+    --text:#eaf0fb; --dim:#9fb0cc; --teal:#19c2c9; --blue:#3b7be0;
+    --grad:linear-gradient(135deg,#19c2c9,#3b7be0);
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f5f8fd; --bg2:#eef3fb; --card:#ffffff; --line:#e0e8f4;
+           --text:#0e1626; --dim:#556484; }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+  .logo{width:30px;height:30px;border-radius:8px;background:var(--grad);
+    display:grid;place-items:center;color:#fff;font-size:16px}
+  header{padding:20px 0;position:sticky;top:0;backdrop-filter:blur(12px);
+    background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line);z-index:5}
+  header .wrap{display:flex;align-items:center;justify-content:space-between}
+  header nav a{color:var(--dim);text-decoration:none;margin-left:18px;font-size:14px}
+  header nav a:hover{color:var(--text)}
+  .hero{text-align:center;padding:76px 0 60px}
+  .hero .logo{width:64px;height:64px;border-radius:16px;font-size:32px;margin:0 auto 22px}
+  .hero h1{font-size:clamp(32px,6vw,52px);line-height:1.08;letter-spacing:-.02em}
+  .hero .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{color:var(--dim);font-size:clamp(17px,2.6vw,21px);max-width:620px;margin:18px auto 0}
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:12px;
+    text-decoration:none;font-weight:600;font-size:15px;border:1px solid var(--line)}
+  .btn.primary{background:var(--grad);color:#fff;border:none}
+  .btn.ghost{background:var(--card);color:var(--text)}
+  .btn small{display:block;font-weight:400;font-size:11px;opacity:.8}
+  .pill{display:inline-block;margin-top:16px;font-size:13px;color:var(--dim);
+    border:1px solid var(--line);border-radius:999px;padding:5px 14px}
+  section{padding:52px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(24px,4vw,32px);letter-spacing:-.01em;text-align:center}
+  h2+.lead{color:var(--dim);text-align:center;max-width:620px;margin:12px auto 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:34px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .card .ic{width:40px;height:40px;border-radius:10px;background:color-mix(in srgb,var(--teal) 18%,transparent);
+    display:grid;place-items:center;font-size:20px;margin-bottom:14px}
+  .card h3{font-size:17px;margin-bottom:6px}
+  .card p{color:var(--dim);font-size:14.5px}
+  .steps{counter-reset:s;margin-top:34px;display:grid;gap:14px}
+  .step{display:flex;gap:16px;align-items:flex-start;background:var(--card);
+    border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .step::before{counter-increment:s;content:counter(s);flex:none;width:34px;height:34px;
+    border-radius:50%;background:var(--grad);color:#fff;font-weight:700;display:grid;place-items:center}
+  .step h3{font-size:16px}
+  .step p{color:var(--dim);font-size:14.5px;margin-top:2px}
+  .privacy{background:var(--bg2)}
+  .checklist{max-width:640px;margin:26px auto 0;display:grid;gap:12px}
+  .check{display:flex;gap:12px;align-items:flex-start}
+  .check .tick{color:var(--teal);font-weight:800;flex:none}
+  .check b{font-weight:600}
+  .check span{color:var(--dim);font-size:14.5px}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:16px 20px;margin-top:12px}
+  details summary{cursor:pointer;font-weight:600;list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";float:right;color:var(--dim)}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--dim);font-size:14.5px;margin-top:10px}
+  footer{padding:40px 0 60px;text-align:center;color:var(--dim);font-size:13px}
+  footer a{color:var(--teal);text-decoration:none}
+  .soon{opacity:.55;pointer-events:none}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand"><span class="logo">⤓</span> Stashdrop</div>
+  <nav>
+    <a href="#how">How it works</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#get">Download</a>
+    <a href="https://github.com/KamaljeetSahoo/stashdrop">GitHub</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="logo">⤓</div>
+  <h1>The Mac you already own<br><span class="grad">is your cloud.</span></h1>
+  <p class="sub">Move photos and videos off your iPhone straight onto your Mac — over your own
+    Wi-Fi, encrypted end to end, verified byte-for-byte. No cloud, no subscription, no accounts.</p>
+  <div class="cta">
+    <a class="btn primary" href="#get">Download for Mac <small>free · macOS 14+</small></a>
+    <a class="btn ghost soon" href="#get">App Store <small>iPhone · coming soon</small></a>
+  </div>
+  <div class="pill">🔒 Nothing ever leaves your two devices</div>
+</div></div>
+
+<section id="why"><div class="wrap">
+  <h2>Storage is expensive. Your Mac isn't.</h2>
+  <p class="lead">Your phone fills up with photos and videos while a terabyte sits idle on your Mac.
+    Stashdrop turns that Mac into private, offline storage for your phone.</p>
+  <div class="grid">
+    <div class="card"><div class="ic">🔐</div><h3>Private &amp; encrypted</h3>
+      <p>Files travel device-to-device over TLS on your local network. No servers, no accounts,
+        nothing on the internet.</p></div>
+    <div class="card"><div class="ic">✅</div><h3>Verified before it counts</h3>
+      <p>A file is only “safe” once its SHA-256 on the Mac matches the phone. Freeing space is
+        opt-in and only ever offered for verified files.</p></div>
+    <div class="card"><div class="ic">📂</div><h3>No lock-in</h3>
+      <p>Your vault is plain files in dated folders. Browse them in Finder, copy them to any drive.
+        Your data outlives the app.</p></div>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2>Set up once, then forget it</h2>
+  <p class="lead">Two apps, zero configuration.</p>
+  <div class="steps">
+    <div class="step"><div><h3>Install Stashdrop on your Mac</h3>
+      <p>Download the app below and open it. A drive icon appears in your menu bar and quietly waits.</p></div></div>
+    <div class="step"><div><h3>Pair your iPhone by scanning a code</h3>
+      <p>Choose “Pair New iPhone” on the Mac; scan the QR with the iPhone app. Your phone pins the
+        Mac’s certificate — no passwords, and no one else can send to your Mac.</p></div></div>
+    <div class="step"><div><h3>Pick what to move, and go</h3>
+      <p>Select photos and videos, tap Transfer. Watch the progress; keep using your phone while it
+        runs. When it’s done and verified, free up the space if you want.</p></div></div>
+  </div>
+</div></section>
+
+<section id="privacy" class="privacy"><div class="wrap">
+  <h2>Your photos never touch the internet</h2>
+  <p class="lead">Most “free up your phone” apps upload to someone’s cloud. Stashdrop doesn’t have a cloud.</p>
+  <div class="checklist">
+    <div class="check"><span class="tick">✓</span><span><b>Device to device only.</b> Transfers go straight from your iPhone to your Mac over the local network or your own hotspot.</span></div>
+    <div class="check"><span class="tick">✓</span><span><b>Encrypted &amp; pinned.</b> TLS on every connection; your phone verifies your Mac’s certificate so it can’t be impersonated.</span></div>
+    <div class="check"><span class="tick">✓</span><span><b>Deletion is yours to make.</b> The app never deletes anything automatically — and only offers it for files already verified on the Mac.</span></div>
+    <div class="check"><span class="tick">✓</span><span><b>Open source.</b> Every line is on GitHub. Read exactly what it does.</span></div>
+  </div>
+</div></section>
+
+<section id="get"><div class="wrap">
+  <h2>Get Stashdrop</h2>
+  <p class="lead">The Mac app is a free download. The iPhone app arrives on the App Store soon.</p>
+  <div class="cta">
+    <a class="btn primary" href="https://github.com/KamaljeetSahoo/stashdrop/releases/latest">
+      Download for Mac <small>.dmg · macOS 14+ · free</small></a>
+    <a class="btn ghost soon" href="#get">Download on the App Store <small>iPhone · coming soon</small></a>
+  </div>
+  <p class="lead" style="margin-top:22px;font-size:13.5px">
+    You need both: the Mac app to receive, and the iPhone app to send.
+    Building from source? See the <a href="https://github.com/KamaljeetSahoo/stashdrop" style="color:var(--teal)">repository</a>.</p>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <h2>Questions</h2>
+  <details><summary>Do I need internet or an account?</summary>
+    <p>No. Stashdrop works entirely on your local network (or your iPhone’s hotspot). There are no
+      servers, sign-ups, or subscriptions.</p></details>
+  <details><summary>What if I use iCloud Photos?</summary>
+    <p>It still works great as a bulk transfer app — copy originals to your Mac. Just know that if
+      iCloud Photos is on, deleting from your phone also removes from iCloud, so Stashdrop keeps the
+      free-up step firmly optional and clearly labeled.</p></details>
+  <details><summary>Is my Mac reachable when I’m out?</summary>
+    <p>On the same Wi-Fi, yes. Away from Wi-Fi, turn on your iPhone’s Personal Hotspot and the Mac
+      joins it automatically. A no-network peer-to-peer mode is on the roadmap.</p></details>
+  <details><summary>What happens to a transfer that gets interrupted?</summary>
+    <p>Nothing bad. A file only enters your vault after it fully arrives and its hash matches;
+      partial transfers are discarded, and retrying never creates duplicates.</p></details>
+  <details><summary>Where do my files end up on the Mac?</summary>
+    <p>In a <code>Stashdrop</code> folder in your home directory, organized by date as ordinary files.
+      Drag them anywhere — an external SSD, a backup, wherever you like.</p></details>
+</div></section>
+
+<footer><div class="wrap">
+  Stashdrop is free and open source (Apache-2.0) · <a href="https://github.com/KamaljeetSahoo/stashdrop">github.com/KamaljeetSahoo/stashdrop</a><br>
+  Made for people who own a Mac and a full iPhone.
+</div></footer>
+</body>
+</html>
