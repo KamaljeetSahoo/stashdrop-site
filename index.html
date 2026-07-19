@@ -577,10 +577,21 @@
 </div></footer>
 
 <script>
+  const els = [...document.querySelectorAll('.reveal')];
   const io = new IntersectionObserver((entries)=>{
     for (const e of entries) if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-  },{threshold:.14});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  },{threshold:.12});
+  els.forEach(el=>io.observe(el));
+  // Initial-viewport pass: IO's first callback can miss elements already on
+  // screen at registration (layout timing), so check rects ourselves — at
+  // first paint, after load, and once more as a last resort.
+  const kick = ()=>els.forEach(el=>{
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight && r.bottom > 0) el.classList.add('in');
+  });
+  requestAnimationFrame(kick);
+  addEventListener('load', kick);
+  setTimeout(kick, 900);
 
   if (matchMedia('(prefers-reduced-motion: reduce)').matches){
     document.querySelectorAll('animateMotion,animate').forEach(a=>a.remove());
