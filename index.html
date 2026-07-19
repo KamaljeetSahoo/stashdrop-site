@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="nojs">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,185 +8,583 @@
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 <meta property="og:title" content="Stashdrop — the Mac you already own is your cloud">
-<meta property="og:description" content="Move photos and videos off your iPhone straight onto your Mac. Encrypted, verified, no cloud, no subscription.">
-<meta property="og:image" content="https://kamaljeetsahoo.github.io/stashdrop/icon.png">
-<meta property="og:url" content="https://kamaljeetsahoo.github.io/stashdrop/">
+<meta property="og:description" content="Move photos off your iPhone straight onto your Mac. Encrypted, verified, no cloud.">
+<meta property="og:image" content="https://kamaljeetsahoo.github.io/stashdrop-site/icon.png">
+<meta property="og:url" content="https://kamaljeetsahoo.github.io/stashdrop-site/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
+<script>document.documentElement.classList.remove("nojs")</script>
 <style>
   :root{
-    --bg:#0b1220; --bg2:#0f1830; --card:#141f38; --line:#24314f;
-    --text:#eaf0fb; --dim:#9fb0cc; --teal:#19c2c9; --blue:#3b7be0;
-    --grad:linear-gradient(135deg,#19c2c9,#3b7be0);
+    --bg:#fafaf7; --text:#0f1523; --dim:#5b6880;
+    --card:#ffffff; --line:rgba(15,21,35,.09);
+    --teal:#11b3bc; --blue:#3b7be0; --coral:#ff6b5e; --mint:#2fc98c; --lav:#8b7cf6;
+    --grad:linear-gradient(135deg,var(--teal),var(--blue));
+    --shadow:0 20px 60px -20px rgba(15,21,35,.18);
   }
-  @media (prefers-color-scheme: light){
-    :root{ --bg:#f5f8fd; --bg2:#eef3fb; --card:#ffffff; --line:#e0e8f4;
-           --text:#0e1626; --dim:#556484; }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0a0f1c; --text:#edf2fc; --dim:#95a2be;
+      --card:#111a2e; --line:rgba(237,242,252,.09);
+      --shadow:0 24px 70px -24px rgba(0,0,0,.6);
+    }
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--text);
-    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    -webkit-font-smoothing:antialiased}
+  body{
+    background:var(--bg); color:var(--text); overflow-x:hidden;
+    font:16px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
   a{color:inherit}
-  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
-  .logo{width:30px;height:30px;border-radius:8px;background:var(--grad);
-    display:grid;place-items:center;color:#fff;font-size:16px}
-  header{padding:20px 0;position:sticky;top:0;backdrop-filter:blur(12px);
-    background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line);z-index:5}
-  header .wrap{display:flex;align-items:center;justify-content:space-between}
-  header nav a{color:var(--dim);text-decoration:none;margin-left:18px;font-size:14px}
-  header nav a:hover{color:var(--text)}
-  .hero{text-align:center;padding:76px 0 60px}
-  .hero .logo{width:64px;height:64px;border-radius:16px;font-size:32px;margin:0 auto 22px}
-  .hero h1{font-size:clamp(32px,6vw,52px);line-height:1.08;letter-spacing:-.02em}
-  .hero .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p.sub{color:var(--dim);font-size:clamp(17px,2.6vw,21px);max-width:620px;margin:18px auto 0}
-  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
-  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:12px;
-    text-decoration:none;font-weight:600;font-size:15px;border:1px solid var(--line)}
-  .btn.primary{background:var(--grad);color:#fff;border:none}
-  .btn.ghost{background:var(--card);color:var(--text)}
-  .btn small{display:block;font-weight:400;font-size:11px;opacity:.8}
-  .pill{display:inline-block;margin-top:16px;font-size:13px;color:var(--dim);
-    border:1px solid var(--line);border-radius:999px;padding:5px 14px}
-  section{padding:52px 0;border-top:1px solid var(--line)}
-  h2{font-size:clamp(24px,4vw,32px);letter-spacing:-.01em;text-align:center}
-  h2+.lead{color:var(--dim);text-align:center;max-width:620px;margin:12px auto 0}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:34px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
-  .card .ic{width:40px;height:40px;border-radius:10px;background:color-mix(in srgb,var(--teal) 18%,transparent);
-    display:grid;place-items:center;font-size:20px;margin-bottom:14px}
-  .card h3{font-size:17px;margin-bottom:6px}
-  .card p{color:var(--dim);font-size:14.5px}
-  .steps{counter-reset:s;margin-top:34px;display:grid;gap:14px}
-  .step{display:flex;gap:16px;align-items:flex-start;background:var(--card);
-    border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-  .step::before{counter-increment:s;content:counter(s);flex:none;width:34px;height:34px;
-    border-radius:50%;background:var(--grad);color:#fff;font-weight:700;display:grid;place-items:center}
-  .step h3{font-size:16px}
-  .step p{color:var(--dim);font-size:14.5px;margin-top:2px}
-  .privacy{background:var(--bg2)}
-  .checklist{max-width:640px;margin:26px auto 0;display:grid;gap:12px}
-  .check{display:flex;gap:12px;align-items:flex-start}
-  .check .tick{color:var(--teal);font-weight:800;flex:none}
-  .check b{font-weight:600}
-  .check span{color:var(--dim);font-size:14.5px}
-  details{background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:16px 20px;margin-top:12px}
-  details summary{cursor:pointer;font-weight:600;list-style:none}
-  details summary::-webkit-details-marker{display:none}
-  details summary::after{content:"+";float:right;color:var(--dim)}
-  details[open] summary::after{content:"–"}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- ambient gradient blobs ---------- */
+  .blobs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;animation:drift 34s ease-in-out infinite alternate}
+  .b1{width:440px;height:440px;background:rgba(17,179,188,.20);top:-160px;left:-120px}
+  .b2{width:500px;height:500px;background:rgba(59,123,224,.16);top:120px;right:-220px;animation-delay:-8s}
+  .b3{width:420px;height:420px;background:rgba(139,124,246,.13);top:900px;left:30%;animation-delay:-16s}
+  @keyframes drift{
+    0%{transform:translate(0,0) scale(1)}
+    100%{transform:translate(60px,40px) scale(1.12)}
+  }
+
+  /* ---------- nav ---------- */
+  .navbar{position:sticky;top:14px;z-index:50;display:flex;justify-content:center;padding:0 16px}
+  .nav-pill{
+    display:flex;align-items:center;gap:22px;padding:10px 12px 10px 18px;
+    background:color-mix(in srgb,var(--card) 72%,transparent);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--line);border-radius:999px;box-shadow:var(--shadow);
+  }
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px;text-decoration:none}
+  .logo{width:26px;height:26px;border-radius:8px;background:var(--grad);display:grid;place-items:center}
+  .logo svg{width:14px;height:14px}
+  .nav-pill nav{display:flex;gap:18px}
+  .nav-pill nav a{color:var(--dim);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+  .nav-pill nav a:hover{color:var(--text)}
+  .nav-gh{
+    display:inline-flex;align-items:center;gap:7px;background:var(--grad);color:#fff;
+    padding:8px 15px;border-radius:999px;font-size:13.5px;font-weight:600;text-decoration:none;
+    transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s;
+  }
+  .nav-gh:hover{transform:translateY(-1px);box-shadow:0 8px 22px -8px rgba(59,123,224,.55)}
+  @media(max-width:640px){.nav-pill nav{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{text-align:center;padding:84px 0 30px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--dim);
+    border:1px solid var(--line);background:color-mix(in srgb,var(--card) 70%,transparent);
+    padding:7px 15px;border-radius:999px;margin-bottom:26px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(47,201,140,.5)}55%{box-shadow:0 0 0 7px rgba(47,201,140,0)}}
+  h1{
+    font-size:clamp(42px,7vw,78px);line-height:1.03;letter-spacing:-.035em;font-weight:800;
+  }
+  h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--dim);font-size:clamp(17px,2.4vw,20px);max-width:560px;margin:22px auto 0}
+  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:16px;
+    font-weight:650;font-size:15.5px;text-decoration:none;border:1px solid var(--line);
+    transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s;
+  }
+  .btn .arr{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+  .btn.primary{background:var(--grad);color:#fff;border:none;box-shadow:0 14px 34px -12px rgba(59,123,224,.5)}
+  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 20px 44px -12px rgba(59,123,224,.6)}
+  .btn.primary:hover .arr{transform:translateX(3px)}
+  .btn.ghost{background:color-mix(in srgb,var(--card) 80%,transparent);color:var(--dim)}
+  .btn.ghost:hover{transform:translateY(-2px);color:var(--text)}
+  .btn small{font-weight:450;font-size:12px;opacity:.75}
+
+  /* ---------- hero scene ---------- */
+  .scene-card{
+    margin:58px auto 0;max-width:1020px;position:relative;border-radius:30px;
+    background:color-mix(in srgb,var(--card) 82%,transparent);
+    border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;
+  }
+  .scene-card::before{
+    content:"";position:absolute;inset:0;border-radius:30px;padding:1.5px;
+    background:linear-gradient(135deg,rgba(17,179,188,.5),rgba(59,123,224,.12) 40%,rgba(139,124,246,.4));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+  }
+  .scene-card svg{display:block;width:100%;height:auto}
+  .scene-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:0 18px 22px}
+  .chip{
+    display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--dim);
+    border:1px solid var(--line);border-radius:999px;padding:6px 13px;
+    background:color-mix(in srgb,var(--bg) 60%,transparent);
+  }
+  .chip svg{width:13px;height:13px}
+
+  /* scene animations (10s master cycle) */
+  .bob{animation:bob 6s ease-in-out infinite}
+  .bob2{animation:bob 6s ease-in-out -3s infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  #phoneFillG{transform-origin:0 50%;animation:drain 10s cubic-bezier(.4,0,.2,1) infinite}
+  #phoneFillRect{animation:fillcolor 10s infinite}
+  @keyframes drain{0%,38%{transform:scaleX(1)}62%,86%{transform:scaleX(.34)}100%{transform:scaleX(1)}}
+  @keyframes fillcolor{0%,40%{fill:var(--coral)}62%,86%{fill:var(--mint)}100%{fill:var(--coral)}}
+  .chipFull{animation:chipfull 10s infinite}
+  .chipFree{animation:chipfree 10s infinite;transform-origin:center}
+  @keyframes chipfull{0%,44%{opacity:1}56%,92%{opacity:0}100%{opacity:1}}
+  @keyframes chipfree{0%,48%{opacity:0;transform:scale(.6)}56%{opacity:1;transform:scale(1.1)}60%,84%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(.8)}}
+  .freed{animation:freed 10s cubic-bezier(.2,.7,.2,1) infinite;transform-origin:center}
+  @keyframes freed{0%,50%{opacity:0;transform:translateY(8px) scale(.7)}57%{opacity:1;transform:translateY(0) scale(1.06)}61%,78%{opacity:1;transform:translateY(-2px) scale(1)}88%,100%{opacity:0;transform:translateY(-14px) scale(.9)}}
+  .slot{opacity:.16;transform:scale(.82);transform-origin:center;animation:slotpop 10s cubic-bezier(.2,.7,.2,1) infinite}
+  .slot:nth-child(1){animation-delay:.0s}.slot:nth-child(2){animation-delay:.45s}
+  .slot:nth-child(3){animation-delay:.9s}.slot:nth-child(4){animation-delay:1.35s}
+  .slot:nth-child(5){animation-delay:1.8s}.slot:nth-child(6){animation-delay:2.25s}
+  @keyframes slotpop{0%,14%{opacity:.16;transform:scale(.82)}20%{opacity:1;transform:scale(1.07)}24%,86%{opacity:1;transform:scale(1)}94%,100%{opacity:.16;transform:scale(.82)}}
+  .lockpulse{transform-origin:center;animation:lockpulse 2.5s ease-out infinite}
+  @keyframes lockpulse{0%{opacity:.55;transform:scale(.6)}70%{opacity:0;transform:scale(1.7)}100%{opacity:0;transform:scale(1.7)}}
+  .spark{transform-origin:center;animation:spark 3.4s ease-in-out infinite}
+  .sp2{animation-delay:-.9s}.sp3{animation-delay:-1.7s}.sp4{animation-delay:-2.6s}
+  @keyframes spark{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:.95;transform:scale(1) rotate(24deg)}}
+  .guide{stroke-dasharray:3 9;animation:march 1.4s linear infinite}
+  @keyframes march{to{stroke-dashoffset:-12}}
+
+  /* ---------- sections ---------- */
+  section{padding:88px 0 0}
+  .kicker{display:block;text-align:center;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
+  h2{font-size:clamp(28px,4.4vw,42px);letter-spacing:-.025em;text-align:center;font-weight:800}
+  .lead{color:var(--dim);text-align:center;max-width:540px;margin:14px auto 0;font-size:16.5px}
+
+  /* storyboard */
+  .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px;margin-top:46px}
+  .panel{
+    background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 16px 20px;
+    box-shadow:var(--shadow);transition:transform .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .panel:hover{transform:translateY(-6px)}
+  .panel .art{border-radius:14px;overflow:hidden;background:
+    linear-gradient(160deg,color-mix(in srgb,var(--teal) 9%,var(--bg)),color-mix(in srgb,var(--blue) 8%,var(--bg)))}
+  .panel .art svg{display:block;width:100%;height:auto}
+  .panel h3{font-size:16.5px;margin:15px 4px 4px;letter-spacing:-.01em}
+  .panel p{color:var(--dim);font-size:14px;margin:0 4px}
+  .num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:8px;background:var(--grad);
+    color:#fff;font-size:12px;font-weight:800;margin-right:7px;vertical-align:-4px}
+
+  /* storyboard micro-animations */
+  .tick{transform-origin:center;animation:tickpop 5s cubic-bezier(.2,.7,.2,1) infinite}
+  .tk2{animation-delay:.5s}.tk3{animation-delay:1s}
+  @keyframes tickpop{0%,10%{opacity:0;transform:scale(.4)}18%{opacity:1;transform:scale(1.15)}22%,80%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(.4)}}
+  .shield-draw{stroke-dasharray:230;stroke-dashoffset:230;animation:draw 4.5s ease-in-out infinite}
+  @keyframes draw{0%{stroke-dashoffset:230}40%,82%{stroke-dashoffset:0}100%{stroke-dashoffset:230}}
+  .vcheck{transform-origin:center;animation:vcheck 4.5s cubic-bezier(.2,.7,.2,1) infinite}
+  @keyframes vcheck{0%,42%{opacity:0;transform:scale(.4)}52%{opacity:1;transform:scale(1.15)}58%,86%{opacity:1;transform:scale(1)}96%,100%{opacity:0}}
+  .star{animation:twinkle 3s ease-in-out infinite}
+  .st2{animation-delay:-1s}.st3{animation-delay:-2s}.st4{animation-delay:-.5s}
+  @keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+  .glow{transform-origin:center;animation:glow 3.2s ease-in-out infinite}
+  @keyframes glow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.9;transform:scale(1.18)}}
+
+  /* privacy band */
+  .band{
+    margin-top:46px;border-radius:28px;padding:40px 30px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#0d3f49,#12386e 60%,#2b2a5e);color:#eef4ff;
+    box-shadow:var(--shadow);
+  }
+  .band h2{color:#fff;text-align:left;font-size:clamp(24px,3.4vw,32px)}
+  .band .lead{text-align:left;margin:10px 0 0;color:#b9c8e6}
+  .band-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:28px}
+  .band-item{display:flex;gap:11px;align-items:flex-start;background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 16px;font-size:14px}
+  .band-item b{display:block;font-size:14.5px;margin-bottom:2px}
+  .band-item span{color:#b9c8e6;font-size:13px}
+  .band-item svg{width:19px;height:19px;flex:none;margin-top:2px}
+
+  /* download */
+  .dl{text-align:center;position:relative;padding-bottom:8px}
+  .dl-glow{position:absolute;left:50%;top:56%;width:520px;height:220px;transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side,rgba(59,123,224,.28),transparent);filter:blur(30px);pointer-events:none}
+  .fine{color:var(--dim);font-size:13px;margin-top:18px}
+  .fine a{color:var(--teal);text-decoration:none}
+
+  /* faq */
+  .faq{max-width:660px;margin:40px auto 0}
+  details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px 21px;margin-top:11px;transition:box-shadow .3s}
+  details[open]{box-shadow:var(--shadow)}
+  summary{cursor:pointer;font-weight:650;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--dim);font-size:19px;transition:transform .3s}
+  details[open] summary::after{transform:rotate(45deg)}
   details p{color:var(--dim);font-size:14.5px;margin-top:10px}
-  footer{padding:40px 0 60px;text-align:center;color:var(--dim);font-size:13px}
+
+  footer{padding:70px 0 56px;text-align:center;color:var(--dim);font-size:13.5px}
   footer a{color:var(--teal);text-decoration:none}
-  .soon{opacity:.55;pointer-events:none}
+
+  /* ---------- scroll reveal ---------- */
+  html:not(.nojs) .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
-<header><div class="wrap">
-  <div class="brand"><span class="logo">⤓</span> Stashdrop</div>
-  <nav>
-    <a href="#how">How it works</a>
-    <a href="#privacy">Privacy</a>
-    <a href="#get">Download</a>
-    <a href="https://github.com/KamaljeetSahoo/stashdrop">GitHub</a>
-  </nav>
-</div></header>
 
-<div class="hero"><div class="wrap">
-  <div class="logo">⤓</div>
-  <h1>The Mac you already own<br><span class="grad">is your cloud.</span></h1>
-  <p class="sub">Move photos and videos off your iPhone straight onto your Mac — over your own
-    Wi-Fi, encrypted end to end, verified byte-for-byte. No cloud, no subscription, no accounts.</p>
-  <div class="cta">
-    <a class="btn primary" href="#get">Download for Mac <small>free · macOS 14+</small></a>
-    <a class="btn ghost soon" href="#get">App Store <small>iPhone · coming soon</small></a>
+<div class="blobs" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+<header class="navbar">
+  <div class="nav-pill">
+    <a class="brand" href="#top">
+      <span class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 5-5m-5 5-5-5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 19h14" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+      Stashdrop
+    </a>
+    <nav>
+      <a href="#flow">How it works</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-gh" href="https://github.com/KamaljeetSahoo/stashdrop">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      Star on GitHub
+    </a>
   </div>
-  <div class="pill">🔒 Nothing ever leaves your two devices</div>
-</div></div>
+</header>
 
-<section id="why"><div class="wrap">
-  <h2>Storage is expensive. Your Mac isn't.</h2>
-  <p class="lead">Your phone fills up with photos and videos while a terabyte sits idle on your Mac.
-    Stashdrop turns that Mac into private, offline storage for your phone.</p>
-  <div class="grid">
-    <div class="card"><div class="ic">🔐</div><h3>Private &amp; encrypted</h3>
-      <p>Files travel device-to-device over TLS on your local network. No servers, no accounts,
-        nothing on the internet.</p></div>
-    <div class="card"><div class="ic">✅</div><h3>Verified before it counts</h3>
-      <p>A file is only “safe” once its SHA-256 on the Mac matches the phone. Freeing space is
-        opt-in and only ever offered for verified files.</p></div>
-    <div class="card"><div class="ic">📂</div><h3>No lock-in</h3>
-      <p>Your vault is plain files in dated folders. Browse them in Finder, copy them to any drive.
-        Your data outlives the app.</p></div>
+<main id="top">
+  <!-- ================= HERO ================= -->
+  <div class="hero wrap">
+    <div class="eyebrow reveal"><span class="dot"></span> Private iPhone → Mac offload · free &amp; open source</div>
+    <h1 class="reveal d1">The Mac you already own<br><span class="grad">is your cloud.</span></h1>
+    <p class="sub reveal d2">Stashdrop moves photos and videos off your iPhone straight onto your Mac —
+      encrypted, verified byte-for-byte, no subscription.</p>
+    <div class="cta reveal d3">
+      <a class="btn primary" href="https://github.com/KamaljeetSahoo/stashdrop/releases/latest">
+        Download for Mac <small>free · macOS 14+</small>
+        <span class="arr"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="btn ghost" href="#faq">iPhone app <small>App Store · soon</small></a>
+    </div>
+
+    <!-- ======== animated scene ======== -->
+    <div class="scene-card reveal d4">
+      <svg viewBox="0 0 1200 560" role="img" aria-label="Animation: photos fly from an iPhone, encrypted, into a Mac vault; the iPhone's storage frees up.">
+        <defs>
+          <linearGradient id="gTeal" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#11b3bc"/><stop offset="1" stop-color="#3b7be0"/>
+          </linearGradient>
+          <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#8ed8f8"/><stop offset="1" stop-color="#cfeef9"/>
+          </linearGradient>
+          <linearGradient id="gSand" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffd9a0"/><stop offset="1" stop-color="#ffb35c"/>
+          </linearGradient>
+          <linearGradient id="gMeadow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#9be7c4"/><stop offset="1" stop-color="#5ccb96"/>
+          </linearGradient>
+          <linearGradient id="gLav" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#c9bff9"/><stop offset="1" stop-color="#8b7cf6"/>
+          </linearGradient>
+          <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+            <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f1523" flood-opacity="0.18"/>
+          </filter>
+          <path id="flight" d="M 345 258 C 520 120, 680 120, 800 226" fill="none"/>
+          <g id="photoTile">
+            <rect x="-17" y="-17" width="34" height="34" rx="9" fill="#fff" stroke="rgba(15,21,35,.16)" stroke-width="1.5"/>
+            <circle cx="-5" cy="-6" r="4.5" fill="#ffce54"/>
+            <path d="M -13 9 L -3 -2 L 4 5 L 9 0 L 14 6 L 14 10 Q 14 12 12 12 L -11 12 Q -13 12 -13 10 Z" fill="#4aa9e9"/>
+          </g>
+        </defs>
+
+        <!-- flight guide -->
+        <use href="#flight" class="guide" stroke="url(#gTeal)" stroke-width="2.5" opacity=".35"/>
+
+        <!-- ============ iPhone ============ -->
+        <g class="bob">
+          <g transform="translate(150,88)" filter="url(#soft)">
+            <rect width="196" height="392" rx="36" fill="#101623"/>
+            <rect x="7" y="7" width="182" height="378" rx="30" fill="#f5f7fb"/>
+            <rect x="70" y="16" width="56" height="17" rx="8.5" fill="#101623"/>
+            <!-- photo grid -->
+            <g transform="translate(20,48)">
+              <rect width="48" height="48" rx="10" fill="url(#gSky)"/><rect x="54" width="48" height="48" rx="10" fill="url(#gSand)"/><rect x="108" width="48" height="48" rx="10" fill="url(#gMeadow)"/>
+              <rect y="54" width="48" height="48" rx="10" fill="url(#gLav)"/><rect x="54" y="54" width="48" height="48" rx="10" fill="url(#gMeadow)"/><rect x="108" y="54" width="48" height="48" rx="10" fill="url(#gSky)"/>
+              <rect y="108" width="48" height="48" rx="10" fill="url(#gSand)"/><rect x="54" y="108" width="48" height="48" rx="10" fill="url(#gSky)"/><rect x="108" y="108" width="48" height="48" rx="10" fill="url(#gLav)"/>
+              <rect y="162" width="48" height="48" rx="10" fill="url(#gMeadow)"/><rect x="54" y="162" width="48" height="48" rx="10" fill="url(#gLav)"/><rect x="108" y="162" width="48" height="48" rx="10" fill="url(#gSand)"/>
+              <!-- tiny suns & mountains to suggest photos -->
+              <g fill="rgba(255,255,255,.85)">
+                <circle cx="12" cy="12" r="5"/><circle cx="66" cy="66" r="5"/><circle cx="120" cy="120" r="5"/><circle cx="12" cy="174" r="5"/>
+              </g>
+              <g fill="rgba(15,21,35,.25)">
+                <path d="M 2 42 L 16 24 L 26 34 L 34 26 L 46 42 Z"/>
+                <path d="M 56 96 L 70 78 L 80 88 L 88 80 L 100 96 Z"/>
+                <path d="M 110 150 L 124 132 L 134 142 L 142 134 L 154 150 Z"/>
+              </g>
+            </g>
+            <!-- storage gauge -->
+            <g transform="translate(20,300)">
+              <text x="0" y="0" font-size="12.5" font-weight="600" fill="#5b6880">iPhone storage</text>
+              <rect y="10" width="156" height="14" rx="7" fill="rgba(15,21,35,.08)"/>
+              <g id="phoneFillG" transform="translate(0,0)">
+                <rect id="phoneFillRect" y="10" width="156" height="14" rx="7" fill="#ff6b5e"/>
+              </g>
+              <g class="chipFull">
+                <rect y="36" width="118" height="26" rx="13" fill="rgba(255,107,94,.14)"/>
+                <circle cx="15" cy="49" r="4" fill="#ff6b5e"/>
+                <text x="27" y="53.5" font-size="12.5" font-weight="700" fill="#e4574a">Almost full</text>
+              </g>
+              <g class="chipFree">
+                <rect y="36" width="118" height="26" rx="13" fill="rgba(47,201,140,.16)"/>
+                <path d="M 10 49 l 4 4 l 7 -8" stroke="#22a873" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <text x="27" y="53.5" font-size="12.5" font-weight="700" fill="#1f9c6b">Feeling light</text>
+              </g>
+            </g>
+          </g>
+          <!-- freed pill -->
+          <g class="freed">
+            <g transform="translate(196,60)">
+              <rect x="-70" y="-19" width="140" height="38" rx="19" fill="url(#gTeal)"/>
+              <text x="0" y="5.5" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">+38 GB freed</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- ============ flying photos ============ -->
+        <g>
+          <g opacity="0"><use href="#photoTile"/>
+            <animateMotion dur="2.8s" begin="0s" repeatCount="indefinite" calcMode="spline" keySplines="0.35 0 0.25 1" keyPoints="0;1" keyTimes="0;1"><mpath href="#flight"/></animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.86;1" dur="2.8s" begin="0s" repeatCount="indefinite"/>
+          </g>
+          <g opacity="0"><use href="#photoTile"/>
+            <animateMotion dur="2.8s" begin="0.7s" repeatCount="indefinite" calcMode="spline" keySplines="0.35 0 0.25 1" keyPoints="0;1" keyTimes="0;1"><mpath href="#flight"/></animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.86;1" dur="2.8s" begin="0.7s" repeatCount="indefinite"/>
+          </g>
+          <g opacity="0"><use href="#photoTile"/>
+            <animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.35 0 0.25 1" keyPoints="0;1" keyTimes="0;1"><mpath href="#flight"/></animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.86;1" dur="2.8s" begin="1.4s" repeatCount="indefinite"/>
+          </g>
+          <g opacity="0"><use href="#photoTile"/>
+            <animateMotion dur="2.8s" begin="2.1s" repeatCount="indefinite" calcMode="spline" keySplines="0.35 0 0.25 1" keyPoints="0;1" keyTimes="0;1"><mpath href="#flight"/></animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.86;1" dur="2.8s" begin="2.1s" repeatCount="indefinite"/>
+          </g>
+        </g>
+
+        <!-- padlock on the flight -->
+        <g transform="translate(572,138)">
+          <circle class="lockpulse" r="26" fill="none" stroke="url(#gTeal)" stroke-width="2"/>
+          <g filter="url(#soft)">
+            <circle r="21" fill="#fff"/>
+            <g transform="translate(-8,-9)">
+              <rect y="7" width="16" height="12" rx="3.5" fill="url(#gTeal)"/>
+              <path d="M 3 7 V 5 a 5 5 0 0 1 10 0 v 2" fill="none" stroke="url(#gTeal)" stroke-width="2.6" stroke-linecap="round"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- sparkles -->
+        <g fill="url(#gTeal)">
+          <path class="spark"      transform="translate(430,105)" d="M0 -7 L1.8 -1.8 L7 0 L1.8 1.8 L0 7 L-1.8 1.8 L-7 0 L-1.8 -1.8 Z"/>
+          <path class="spark sp2" transform="translate(700,95)"  d="M0 -6 L1.6 -1.6 L6 0 L1.6 1.6 L0 6 L-1.6 1.6 L-6 0 L-1.6 -1.6 Z"/>
+          <path class="spark sp3" transform="translate(505,205)" d="M0 -5 L1.4 -1.4 L5 0 L1.4 1.4 L0 5 L-1.4 1.4 L-5 0 L-1.4 -1.4 Z"/>
+          <path class="spark sp4" transform="translate(655,190)" d="M0 -5 L1.4 -1.4 L5 0 L1.4 1.4 L0 5 L-1.4 1.4 L-5 0 L-1.4 -1.4 Z"/>
+        </g>
+
+        <!-- ============ MacBook ============ -->
+        <g class="bob2">
+          <g transform="translate(742,116)" filter="url(#soft)">
+            <rect width="368" height="242" rx="20" fill="#101623"/>
+            <rect x="10" y="10" width="348" height="222" rx="12" fill="#f5f7fb"/>
+            <circle cx="184" cy="17" r="2.6" fill="#3a4358"/>
+            <!-- vault window -->
+            <g transform="translate(34,32)">
+              <rect width="300" height="178" rx="12" fill="#fff" stroke="rgba(15,21,35,.09)"/>
+              <circle cx="18" cy="16" r="4.5" fill="#ff5f57"/><circle cx="34" cy="16" r="4.5" fill="#febc2e"/><circle cx="50" cy="16" r="4.5" fill="#28c840"/>
+              <text x="150" y="21" font-size="12" font-weight="700" fill="#5b6880" text-anchor="middle">Stashdrop vault</text>
+              <g transform="translate(18,36)">
+                <g class="slot"><rect width="80" height="56" rx="9" fill="url(#gSky)"/><path d="M 6 48 L 22 28 L 34 40 L 44 30 L 58 48 Z" fill="rgba(255,255,255,.7)"/></g>
+                <g class="slot"><rect x="92" width="80" height="56" rx="9" fill="url(#gSand)"/><circle cx="112" cy="16" r="7" fill="rgba(255,255,255,.8)"/></g>
+                <g class="slot"><rect x="184" width="80" height="56" rx="9" fill="url(#gMeadow)"/><path d="M 190 48 L 206 28 L 218 40 L 228 30 L 242 48 Z" fill="rgba(255,255,255,.7)"/></g>
+                <g class="slot"><rect y="66" width="80" height="56" rx="9" fill="url(#gLav)"/><circle cx="20" cy="82" r="7" fill="rgba(255,255,255,.8)"/></g>
+                <g class="slot"><rect x="92" y="66" width="80" height="56" rx="9" fill="url(#gMeadow)"/><path d="M 98 114 L 114 94 L 126 106 L 136 96 L 150 114 Z" fill="rgba(255,255,255,.7)"/></g>
+                <g class="slot"><rect x="184" y="66" width="80" height="56" rx="9" fill="url(#gSky)"/><circle cx="204" cy="82" r="7" fill="rgba(255,255,255,.8)"/></g>
+              </g>
+            </g>
+          </g>
+          <!-- deck -->
+          <g filter="url(#soft)">
+            <path d="M 706 358 H 1146 L 1120 384 Q 1116 390 1108 390 H 744 Q 736 390 732 384 Z" fill="#c7cede"/>
+            <rect x="886" y="358" width="80" height="9" rx="4.5" fill="#aab2c5"/>
+          </g>
+        </g>
+      </svg>
+      <div class="scene-chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> Encrypted in flight</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> SHA-256 verified</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M4 4 20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Zero servers</span>
+      </div>
+    </div>
   </div>
-</div></section>
 
-<section id="how"><div class="wrap">
-  <h2>Set up once, then forget it</h2>
-  <p class="lead">Two apps, zero configuration.</p>
-  <div class="steps">
-    <div class="step"><div><h3>Install Stashdrop on your Mac</h3>
-      <p>Download the app below and open it. A drive icon appears in your menu bar and quietly waits.</p></div></div>
-    <div class="step"><div><h3>Pair your iPhone by scanning a code</h3>
-      <p>Choose “Pair New iPhone” on the Mac; scan the QR with the iPhone app. Your phone pins the
-        Mac’s certificate — no passwords, and no one else can send to your Mac.</p></div></div>
-    <div class="step"><div><h3>Pick what to move, and go</h3>
-      <p>Select photos and videos, tap Transfer. Watch the progress; keep using your phone while it
-        runs. When it’s done and verified, free up the space if you want.</p></div></div>
-  </div>
-</div></section>
+  <!-- ================= STORYBOARD ================= -->
+  <section id="flow"><div class="wrap">
+    <span class="kicker reveal">The flow</span>
+    <h2 class="reveal d1">From full to free, in four scenes</h2>
+    <p class="lead reveal d2">No setup maze. Pair once by scanning a code — after that it's pick, send, done.</p>
 
-<section id="privacy" class="privacy"><div class="wrap">
-  <h2>Your photos never touch the internet</h2>
-  <p class="lead">Most “free up your phone” apps upload to someone’s cloud. Stashdrop doesn’t have a cloud.</p>
-  <div class="checklist">
-    <div class="check"><span class="tick">✓</span><span><b>Device to device only.</b> Transfers go straight from your iPhone to your Mac over the local network or your own hotspot.</span></div>
-    <div class="check"><span class="tick">✓</span><span><b>Encrypted &amp; pinned.</b> TLS on every connection; your phone verifies your Mac’s certificate so it can’t be impersonated.</span></div>
-    <div class="check"><span class="tick">✓</span><span><b>Deletion is yours to make.</b> The app never deletes anything automatically — and only offers it for files already verified on the Mac.</span></div>
-    <div class="check"><span class="tick">✓</span><span><b>Open source.</b> Every line is on GitHub. Read exactly what it does.</span></div>
-  </div>
-</div></section>
+    <div class="board">
+      <div class="panel reveal">
+        <div class="art"><svg viewBox="0 0 240 150">
+          <g transform="translate(78,16)" >
+            <rect width="84" height="150" rx="16" fill="#101623"/>
+            <rect x="4" y="4" width="76" height="142" rx="12" fill="#f5f7fb"/>
+            <g transform="translate(11,14)">
+              <rect width="30" height="30" rx="7" fill="url(#gSky)"/><rect x="33" width="30" height="30" rx="7" fill="url(#gSand)"/>
+              <rect y="33" width="30" height="30" rx="7" fill="url(#gMeadow)"/><rect x="33" y="33" width="30" height="30" rx="7" fill="url(#gLav)"/>
+              <rect y="66" width="30" height="30" rx="7" fill="url(#gLav)"/><rect x="33" y="66" width="30" height="30" rx="7" fill="url(#gSky)"/>
+              <g class="tick"><circle cx="26" cy="26" r="8" fill="#11b3bc"/><path d="m22 26 3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+              <g class="tick tk2"><circle cx="59" cy="59" r="8" fill="#11b3bc"/><path d="m55 59 3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+              <g class="tick tk3"><circle cx="26" cy="92" r="8" fill="#11b3bc"/><path d="m22 92 3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+            </g>
+          </g>
+        </svg></div>
+        <h3><span class="num">1</span>Pick</h3>
+        <p>Tap the photos and videos you want off your phone.</p>
+      </div>
 
-<section id="get"><div class="wrap">
-  <h2>Get Stashdrop</h2>
-  <p class="lead">The Mac app is a free download. The iPhone app arrives on the App Store soon.</p>
-  <div class="cta">
-    <a class="btn primary" href="https://github.com/KamaljeetSahoo/stashdrop/releases/latest">
-      Download for Mac <small>.dmg · macOS 14+ · free</small></a>
-    <a class="btn ghost soon" href="#get">Download on the App Store <small>iPhone · coming soon</small></a>
-  </div>
-  <p class="lead" style="margin-top:22px;font-size:13.5px">
-    You need both: the Mac app to receive, and the iPhone app to send.
-    Building from source? See the <a href="https://github.com/KamaljeetSahoo/stashdrop" style="color:var(--teal)">repository</a>.</p>
-</div></section>
+      <div class="panel reveal d1">
+        <div class="art"><svg viewBox="0 0 240 150">
+          <path id="miniflight" d="M 48 96 C 90 52, 150 52, 194 88" fill="none"/>
+          <use href="#miniflight" class="guide" stroke="url(#gTeal)" stroke-width="2" opacity=".45"/>
+          <g transform="translate(28,84)"><rect width="34" height="58" rx="8" fill="#101623"/><rect x="3" y="3" width="28" height="52" rx="6" fill="#f5f7fb"/></g>
+          <g transform="translate(178,80)"><rect width="52" height="34" rx="5" fill="#101623"/><rect x="3" y="3" width="46" height="28" rx="3" fill="#f5f7fb"/><rect x="14" y="116" width="0" height="0"/></g>
+          <g transform="translate(120,56)"><circle r="13" fill="#fff" stroke="rgba(15,21,35,.1)"/><g transform="translate(-5,-6)"><rect y="5" width="10" height="8" rx="2.5" fill="url(#gTeal)"/><path d="M 2 5 V 3.6 a 3 3 0 0 1 6 0 V 5" fill="none" stroke="url(#gTeal)" stroke-width="1.8" stroke-linecap="round"/></g></g>
+          <g opacity="0"><rect x="-9" y="-9" width="18" height="18" rx="5" fill="#fff" stroke="rgba(15,21,35,.12)"/><circle cx="-2" cy="-3" r="2.4" fill="#ffce54"/><path d="M -7 5 L -2 -1 L 2 3 L 4 1 L 7 5 Z" fill="#4aa9e9"/>
+            <animateMotion dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1" keyPoints="0;1" keyTimes="0;1"><mpath href="#miniflight"/></animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="2s" repeatCount="indefinite"/>
+          </g>
+        </svg></div>
+        <h3><span class="num">2</span>Send</h3>
+        <p>They fly over your Wi-Fi or hotspot — encrypted, device to device.</p>
+      </div>
 
-<section id="faq"><div class="wrap">
-  <h2>Questions</h2>
-  <details><summary>Do I need internet or an account?</summary>
-    <p>No. Stashdrop works entirely on your local network (or your iPhone’s hotspot). There are no
-      servers, sign-ups, or subscriptions.</p></details>
-  <details><summary>What if I use iCloud Photos?</summary>
-    <p>It still works great as a bulk transfer app — copy originals to your Mac. Just know that if
-      iCloud Photos is on, deleting from your phone also removes from iCloud, so Stashdrop keeps the
-      free-up step firmly optional and clearly labeled.</p></details>
-  <details><summary>Is my Mac reachable when I’m out?</summary>
-    <p>On the same Wi-Fi, yes. Away from Wi-Fi, turn on your iPhone’s Personal Hotspot and the Mac
-      joins it automatically. A no-network peer-to-peer mode is on the roadmap.</p></details>
-  <details><summary>What happens to a transfer that gets interrupted?</summary>
-    <p>Nothing bad. A file only enters your vault after it fully arrives and its hash matches;
-      partial transfers are discarded, and retrying never creates duplicates.</p></details>
-  <details><summary>Where do my files end up on the Mac?</summary>
-    <p>In a <code>Stashdrop</code> folder in your home directory, organized by date as ordinary files.
-      Drag them anywhere — an external SSD, a backup, wherever you like.</p></details>
-</div></section>
+      <div class="panel reveal d2">
+        <div class="art"><svg viewBox="0 0 240 150">
+          <g transform="translate(120,75)">
+            <path class="shield-draw" d="M 0 -46 L 34 -32 V -6 C 34 18 16 38 0 44 C -16 38 -34 18 -34 -6 V -32 Z" fill="none" stroke="url(#gTeal)" stroke-width="4" stroke-linejoin="round"/>
+            <g class="vcheck"><path d="m -14 0 10 10 20 -22" fill="none" stroke="#11b3bc" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+          </g>
+          <g transform="translate(120,132)"><rect x="-38" y="-11" width="76" height="21" rx="10.5" fill="rgba(17,179,188,.13)"/><text y="4" font-size="11" font-weight="700" fill="#0d8f96" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">SHA-256 ✓</text></g>
+        </svg></div>
+        <h3><span class="num">3</span>Verify</h3>
+        <p>Every byte is hash-checked on the Mac before it counts as safe.</p>
+      </div>
+
+      <div class="panel reveal d3">
+        <div class="art"><svg viewBox="0 0 240 150">
+          <rect width="240" height="150" fill="#17224a"/>
+          <g fill="#fff">
+            <circle class="star" cx="36" cy="26" r="2"/><circle class="star st2" cx="86" cy="16" r="1.6"/>
+            <circle class="star st3" cx="140" cy="30" r="2.2"/><circle class="star st4" cx="196" cy="20" r="1.7"/>
+            <circle class="star st2" cx="216" cy="48" r="1.5"/><circle class="star st3" cx="20" cy="56" r="1.5"/>
+          </g>
+          <path d="M 0 108 L 52 62 L 96 104 L 132 72 L 178 112 L 240 66 V 150 H 0 Z" fill="#232f63"/>
+          <path d="M 0 122 L 60 84 L 110 122 L 156 92 L 240 128 V 150 H 0 Z" fill="#2c3a77"/>
+          <ellipse class="glow" cx="120" cy="122" rx="34" ry="14" fill="#ffb35c" opacity=".5"/>
+          <g transform="translate(120,112)">
+            <path d="M -26 14 L 0 -26 L 26 14 Z" fill="#ff8f5e"/>
+            <path d="M 0 -26 L 26 14 H 8 Z" fill="#e96f43"/>
+            <path d="M -6 14 L 0 2 L 6 14 Z" fill="#5b2c1c"/>
+          </g>
+          <g transform="translate(196,124)"><rect x="-30" y="-12" width="60" height="23" rx="11" fill="rgba(47,201,140,.9)"/><text y="4" font-size="11.5" font-weight="800" fill="#fff" text-anchor="middle">+38 GB</text></g>
+        </svg></div>
+        <h3><span class="num">4</span>Adventure on</h3>
+        <p>Free the space — and keep shooting. Your originals live safe on your Mac.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ================= PRIVACY ================= -->
+  <section id="privacy"><div class="wrap">
+    <div class="band reveal">
+      <h2>Your photos never touch the internet</h2>
+      <p class="lead">Most “free up space” apps upload to someone's cloud. Stashdrop doesn't have one.</p>
+      <div class="band-grid">
+        <div class="band-item">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M7 9h10M7 15h6" stroke="#7fd8dd" stroke-width="2" stroke-linecap="round"/><rect x="2.5" y="4" width="19" height="16" rx="3.5" stroke="#7fd8dd" stroke-width="2"/></svg>
+          <div><b>Device to device</b><span>Straight from iPhone to Mac over your own network.</span></div>
+        </div>
+        <div class="band-item">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2.5" stroke="#7fd8dd" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#7fd8dd" stroke-width="2"/></svg>
+          <div><b>Paired &amp; pinned</b><span>Scan a QR once; your phone trusts only your Mac.</span></div>
+        </div>
+        <div class="band-item">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M9 7V5h6v2m-9 0 1 13h10l1-13" stroke="#7fd8dd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><b>Deletes are yours</b><span>Only offered after verification. Never automatic.</span></div>
+        </div>
+        <div class="band-item">
+          <svg viewBox="0 0 24 24" fill="none"><path d="m9 8-5 4 5 4M15 8l5 4-5 4" stroke="#7fd8dd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><b>Open source</b><span>Every line on GitHub. Read what it does.</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ================= DOWNLOAD ================= -->
+  <section id="get"><div class="wrap dl">
+    <div class="dl-glow" aria-hidden="true"></div>
+    <span class="kicker reveal">Get started</span>
+    <h2 class="reveal d1">Two apps. Zero accounts.</h2>
+    <p class="lead reveal d2">Install on the Mac, pair your iPhone, done.</p>
+    <div class="cta reveal d3">
+      <a class="btn primary" href="https://github.com/KamaljeetSahoo/stashdrop/releases/latest">
+        Download for Mac <small>.dmg · free</small>
+        <span class="arr"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 4v12m0 0 5-5m-5 5-5-5M5 20h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="btn ghost" href="https://github.com/KamaljeetSahoo/stashdrop">iPhone app <small>App Store · soon</small></a>
+    </div>
+    <p class="fine reveal d4">Building from source? Everything's in the <a href="https://github.com/KamaljeetSahoo/stashdrop">repository</a>.</p>
+  </div></section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq"><div class="wrap">
+    <span class="kicker reveal">Questions</span>
+    <h2 class="reveal d1">Good to know</h2>
+    <div class="faq reveal d2">
+      <details>
+        <summary>Do I need internet or an account?</summary>
+        <p>No. Stashdrop works entirely on your local network or your iPhone's hotspot. No servers, no sign-ups, no subscription.</p>
+      </details>
+      <details>
+        <summary>What if a transfer gets interrupted?</summary>
+        <p>Nothing bad. A file only enters your vault after it fully arrives and its hash matches. Partials are discarded; retries never duplicate.</p>
+      </details>
+      <details>
+        <summary>I use iCloud Photos — can I still use this?</summary>
+        <p>Yes, as a great bulk-transfer tool. Note that with iCloud Photos on, deleting from the phone also removes from iCloud — which is why freeing space is strictly optional and clearly labeled.</p>
+      </details>
+      <details>
+        <summary>Where do files end up on my Mac?</summary>
+        <p>A plain <code>Stashdrop</code> folder in your home directory, organized by date. Ordinary files — browse them in Finder, drag them to any drive.</p>
+      </details>
+    </div>
+  </div></section>
+</main>
 
 <footer><div class="wrap">
-  Stashdrop is free and open source (Apache-2.0) · <a href="https://github.com/KamaljeetSahoo/stashdrop">github.com/KamaljeetSahoo/stashdrop</a><br>
+  Stashdrop is free &amp; open source (Apache-2.0) · <a href="https://github.com/KamaljeetSahoo/stashdrop">GitHub</a><br>
   Made for people who own a Mac and a full iPhone.
 </div></footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    for (const e of entries) if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('animateMotion,animate').forEach(a=>a.remove());
+  }
+</script>
 </body>
 </html>
