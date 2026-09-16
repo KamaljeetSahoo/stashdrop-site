@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Stashdrop</title>
+<meta name="description" content="Stashdrop collects nothing. Your photos move only between your own iPhone and your own Mac.">
+<link rel="icon" type="image/png" href="icon.png">
+<style>
+  :root{
+    --bg:#fafaf7; --text:#0f1523; --dim:#5b6880;
+    --card:#ffffff; --line:rgba(15,21,35,.09);
+    --teal:#11b3bc; --blue:#3b7be0;
+    --grad:linear-gradient(135deg,var(--teal),var(--blue));
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0a0f1c; --text:#edf2fc; --dim:#95a2be; --card:#111a2e; --line:rgba(237,242,252,.09); }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--teal)}
+  header{max-width:720px;margin:0 auto;padding:28px 24px 0;display:flex;justify-content:space-between;align-items:center}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;text-decoration:none;color:var(--text)}
+  .logo{width:26px;height:26px;border-radius:8px;background:var(--grad)}
+  .back{font-size:14px;color:var(--dim);text-decoration:none}
+  .back:hover{color:var(--text)}
+  main{max-width:720px;margin:0 auto;padding:40px 24px 80px}
+  h1{font-size:clamp(30px,5vw,42px);line-height:1.1;letter-spacing:-.02em;margin-bottom:10px}
+  .updated{color:var(--dim);font-size:14px;margin-bottom:34px}
+  .lede{font-size:19px;color:var(--dim);margin-bottom:34px}
+  h2{font-size:20px;letter-spacing:-.01em;margin:38px 0 10px}
+  p,li{color:var(--text)}
+  p+p{margin-top:10px}
+  ul{margin:8px 0 0 20px}
+  li{margin:6px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:14px 0}
+  .card b{display:block;margin-bottom:4px}
+  code{font:14px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--line);padding:1px 6px;border-radius:6px}
+  footer{max-width:720px;margin:0 auto;padding:0 24px 40px;color:var(--dim);font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="./"><span class="logo"></span>Stashdrop</a>
+  <a class="back" href="./">← Back to home</a>
+</header>
+<main>
+  <h1>Privacy</h1>
+  <p class="updated">Last updated 16 September 2026</p>
+  <p class="lede">Stashdrop collects nothing. Your photos and videos move only between your own iPhone and your own Mac, and never pass through any server — because there isn't one.</p>
+
+  <h2>What we collect</h2>
+  <p>Nothing. There are no accounts, no analytics, no crash reporting, no advertising and no tracking of any kind. We have no servers that could receive your data, and the apps contain no code that sends it anywhere except the Mac you pair with.</p>
+
+  <h2>Where your files go</h2>
+  <p>When you send photos, they travel directly from your iPhone to your Mac over your own Wi-Fi network or your iPhone's Personal Hotspot. The connection is encrypted, and your iPhone only trusts the specific Mac you paired with — it checks that Mac's certificate on every connection.</p>
+  <p>On your Mac, files are saved as ordinary photos and videos in a <code>Stashdrop</code> folder in your home folder, organised by year and month. They stay there until you move or delete them.</p>
+
+  <h2>What stays on your devices</h2>
+  <div class="card">
+    <b>On your iPhone</b>
+    <ul>
+      <li>A record of what you've transferred — file names, sizes, checksums and where each file landed on your Mac — so the app can show what's already safe.</li>
+      <li>The name and certificate fingerprint of your paired Mac, and the key used to talk to it.</li>
+      <li>A random identifier for this iPhone and the name you give it, so your Mac can tell your phone apart from another one.</li>
+      <li>Small preferences, such as the photo grid's zoom level.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <b>On your Mac</b>
+    <ul>
+      <li>The photos and videos you sent, plus a list of them with their checksums.</li>
+      <li>The keys, identifiers and names of the iPhones you've paired.</li>
+      <li>The Mac's own certificate, used to prove its identity to your iPhone.</li>
+    </ul>
+  </div>
+  <p>None of this is ever sent to us. Deleting the apps removes what they store; the photos you transferred to your Mac stay there until you remove them.</p>
+
+  <h2>Permissions, and why</h2>
+  <ul>
+    <li><b>Photos</b> — to show your library so you can choose what to send, and, only if you ask, to delete originals after they are verified on your Mac. Deletion always goes through the iPhone's own confirmation, and anything removed sits in Recently Deleted for 30 days.</li>
+    <li><b>Camera</b> — only to scan the pairing code shown on your Mac.</li>
+    <li><b>Local Network</b> — to find and connect to your Mac. Stashdrop cannot work without it.</li>
+  </ul>
+
+  <h2>iCloud Photos</h2>
+  <p>If you use iCloud Photos, deleting a photo from your iPhone also deletes it from iCloud and your other devices. Stashdrop never deletes anything unless you choose to, and only after the file is confirmed safe on your Mac.</p>
+
+  <h2>This website and the download</h2>
+  <p>This site is hosted on GitHub Pages and the Mac app is downloaded from GitHub, so GitHub may log those visits under <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">its own privacy statement</a>. The site uses no cookies, analytics or tracking of its own.</p>
+
+  <h2>Children</h2>
+  <p>Stashdrop collects no personal information from anyone, including children.</p>
+
+  <h2>Changes</h2>
+  <p>If this ever changes, this page will be updated first and the date at the top will change. Nothing about the promise above would change quietly.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about privacy? <a href="support.html#contact">Get in touch</a>.</p>
+</main>
+<footer>Stashdrop is free · <a href="privacy.html">Privacy</a> · <a href="support.html">Support</a></footer>
+</body>
+</html>

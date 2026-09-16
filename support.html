@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Stashdrop</title>
+<meta name="description" content="Set up Stashdrop, fix connection problems, and get help.">
+<link rel="icon" type="image/png" href="icon.png">
+<style>
+  :root{
+    --bg:#fafaf7; --text:#0f1523; --dim:#5b6880;
+    --card:#ffffff; --line:rgba(15,21,35,.09);
+    --teal:#11b3bc; --blue:#3b7be0;
+    --grad:linear-gradient(135deg,var(--teal),var(--blue));
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0a0f1c; --text:#edf2fc; --dim:#95a2be; --card:#111a2e; --line:rgba(237,242,252,.09); }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--teal)}
+  header{max-width:720px;margin:0 auto;padding:28px 24px 0;display:flex;justify-content:space-between;align-items:center}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;text-decoration:none;color:var(--text)}
+  .logo{width:26px;height:26px;border-radius:8px;background:var(--grad)}
+  .back{font-size:14px;color:var(--dim);text-decoration:none}
+  .back:hover{color:var(--text)}
+  main{max-width:720px;margin:0 auto;padding:40px 24px 80px}
+  h1{font-size:clamp(30px,5vw,42px);line-height:1.1;letter-spacing:-.02em;margin-bottom:10px}
+  .updated{color:var(--dim);font-size:14px;margin-bottom:34px}
+  .lede{font-size:19px;color:var(--dim);margin-bottom:34px}
+  h2{font-size:20px;letter-spacing:-.01em;margin:38px 0 10px}
+  p,li{color:var(--text)}
+  p+p{margin-top:10px}
+  ul{margin:8px 0 0 20px}
+  li{margin:6px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:14px 0}
+  .card b{display:block;margin-bottom:4px}
+  code{font:14px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--line);padding:1px 6px;border-radius:6px}
+  footer{max-width:720px;margin:0 auto;padding:0 24px 40px;color:var(--dim);font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="./"><span class="logo"></span>Stashdrop</a>
+  <a class="back" href="./">← Back to home</a>
+</header>
+<main>
+  <h1>Support</h1>
+  <p class="lede">Getting set up, and what to do when something doesn't connect.</p>
+
+  <h2 id="requirements">What you need</h2>
+  <ul>
+    <li>A Mac running <b>macOS 14 Sonoma</b> or later.</li>
+    <li>An iPhone running <b>iOS 26</b> or later.</li>
+    <li>Both on the same Wi-Fi network — or your Mac joined to your iPhone's Personal Hotspot.</li>
+  </ul>
+
+  <h2 id="setup">Getting started</h2>
+  <ol style="margin:8px 0 0 20px">
+    <li><a href="./#get">Download Stashdrop for Mac</a>, open the disk image, and drag Stashdrop into Applications.</li>
+    <li>Open it. It lives in your menu bar. If it asks to find devices on your local network, choose <b>Allow</b>.</li>
+    <li>From the menu bar icon, choose <b>Pair New iPhone</b>. A code appears.</li>
+    <li>Open Stashdrop on your iPhone, tap <b>Scan the QR code</b>, and point the camera at your Mac. Both screens will confirm once they've connected.</li>
+  </ol>
+
+  <h2 id="troubleshooting">If something isn't working</h2>
+
+  <div class="card">
+    <b>My iPhone can't find my Mac</b>
+    <ul>
+      <li>Check both devices are on the <b>same Wi-Fi</b>, and that your Mac is awake with Stashdrop running in the menu bar.</li>
+      <li>On your iPhone: <b>Settings › Privacy &amp; Security › Local Network</b> — make sure Stashdrop is on.</li>
+      <li>On your Mac: <b>System Settings › Privacy &amp; Security › Local Network</b> — make sure Stashdrop is on. If it was off, quit and reopen Stashdrop.</li>
+      <li>Café, hotel and office Wi-Fi often stop devices seeing each other. Turn on your iPhone's <b>Personal Hotspot</b> and join it from your Mac instead — it works anywhere.</li>
+      <li>Tap the connection pill at the top of the iPhone app to search again.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <b>“Your Mac's identity changed”</b>
+    <p>This appears when your Mac presents a different certificate than the one your iPhone paired with. It's expected if you reinstalled Stashdrop on your Mac or set up a new Mac — pair again. If you didn't do either of those, don't pair: something else may be pretending to be your Mac.</p>
+  </div>
+
+  <div class="card">
+    <b>Only some of my photos show up</b>
+    <p>You've given Stashdrop access to selected photos only. Tap <b>Select More</b> in the banner, or allow full access in <b>Settings › Stashdrop › Photos</b>.</p>
+  </div>
+
+  <div class="card">
+    <b>Where do my files go on the Mac?</b>
+    <p>Into a folder called <code>Stashdrop</code> in your home folder, sorted by year and month. They're ordinary files — open them in Finder, or use <b>Move to…</b> in the Stashdrop window to put a batch onto an external drive.</p>
+  </div>
+
+  <div class="card">
+    <b>Is it safe to delete photos from my iPhone?</b>
+    <p>Only once they show the <b>green check</b> in the photo grid — that means every byte arrived and matched. Stashdrop never deletes anything on its own. If you use iCloud Photos, remember that deleting on your iPhone also deletes from iCloud.</p>
+  </div>
+
+  <div class="card">
+    <b>A transfer stopped halfway</b>
+    <p>Nothing is lost. A file only counts once it has fully arrived and its checksum matches; anything partial is discarded. Send it again — files that already arrived are skipped, and nothing is ever duplicated.</p>
+  </div>
+
+  <div class="card">
+    <b>Unpairing a device</b>
+    <p>On your iPhone, open <b>Settings › Unpair This Mac</b>. Re-pairing the same iPhone later replaces its old entry on your Mac rather than adding another.</p>
+  </div>
+
+  <h2 id="contact">Contact</h2>
+  <p>Found a bug, or need help? <a href="https://github.com/KamaljeetSahoo/stashdrop-site/issues">Open an issue</a> and include your macOS and iOS versions.</p>
+</main>
+<footer>Stashdrop is free · <a href="privacy.html">Privacy</a> · <a href="support.html">Support</a></footer>
+</body>
+</html>
